@@ -1,0 +1,23 @@
+<head>
+  <title>Map Info</title>
+</head>
+<body>
+<% include ./partials/nav-bar.ejs %>
+<form action="/map_info" method="post"></form>
+  <p>Please enter the title of your map: 
+    <input type="text" size="20" maxlength="30" />
+  </p>
+  <textarea name="title" placeholder="Title..."></textarea>
+  <p>
+    Please enter the description of your map: 
+    <input type="text" size="20" maxlength="200" />
+  </p>
+  <textarea name="description" placeholder="Description..."></textarea>  
+  <p>
+    Please enter the starting location: 
+    <input type="text" size="20" maxlength="50" />
+  </p>
+  <textarea name="start" placeholder="Starting Location..."></textarea>
+  <button class="create" value="Create"></button>
+</body>
+
