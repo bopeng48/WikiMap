@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+<title>Profile Page</title>
+</head>
+<body>
+ <header>
+   <% include ./partials/nav-bar.ejs %>
+ </header>
+ 
+ <div class="container">
+
+  <div class="page-header text-center">
+    <h1><span class="fa fa-user"></span> Profile Page</h1>
+    <a href="/logout">Logout</a>
+    <a href="/map">Map</a>
+  </div>
+
+  <div class="loggedas">
+    <p>Logged in as: <%= first_name %> <%= last_name%></p>
+  </div>
+
+  <div class="row">
+    <img id="profilePic" src="<%= picture %>"/>
+
+    <p>User ID: <%= user_id %></p>
+    <p>Username: <%= username %></p>
+    <p>E-mail: <%= email %></p>
+    <p>First Name: <%= first_name %></p>
+    <p>Last Name: <%= last_name %></p>
+  </div>
+
+  <div>
+  <h1>Maps</h1>
+    <h3>My Contribution</h3>
+    <p id="contributed"></p>
+    <h3>Favourites</h3>
+    <p id="favourites"></p>
+    <h3>Created</h3>
+    <p id="created"></p>
+  </div>
+  </body>
+</html>
