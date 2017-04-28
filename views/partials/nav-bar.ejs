@@ -7,12 +7,18 @@
 <meta charset="UTF-8">
  <div class="nav">
  <div class="loggedas">
-    <p class="loggedas"><%= first_name %> <%= last_name%></p>
+     <% if (user_id) { %>
+    	<p>Logged in as: <%= user_id %></p>
+      <form action="/logout" method="POST">
+      <input type="submit" value="Logout">
+      </form>
+      <a href="/maps/new">Create New Map</a>
+    <% } else{ %>
+    <a href="/login">Login</a>
+    <% } %>
       <ul>
-        <li><div class="logout" href="/logout">Logout</div></li>
-        <li><div class="homepage" href="/homepage">Homepage</div></li>
-        <li><div class="new-map" href="/new-map">Create New Map</div></li>
-        <li><div class="exploremaps" href="/mapslist">Explore Maps</div></li>
+        <li><div class="homepage" href="/all_maps">Homepage</div></li>
+        <li><div class="exploremaps" href="/all_maps">Explore Maps</div></li>
       </ul>
-    </div>
+  </div>
     </html>

@@ -22,7 +22,7 @@
 
 </style>
  <header>
-   <% include ./partials/nav-bar.ejs %>
+     <%- include('partials/nav-bar.ejs') %>
  </header>
  
  <div class="profile-container">
@@ -39,7 +39,7 @@
   <div class="row">
     <img id="profilePic" src="<%= picture %>"/>
 
-    <p>User ID: <%= user_id %></p>
+    <p>User ID: <%= username %></p>
     <p>E-mail: <%= email %></p>
     <p>First Name: <%= first_name %></p>
     <p>Last Name: <%= last_name %></p>
