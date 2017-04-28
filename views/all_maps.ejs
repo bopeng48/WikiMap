@@ -9,9 +9,16 @@
   
   <style>
     .jumbotron {
-      background-color: crimson;
-      color: darkslategrey;
+      background-color: red;
+      color: black;
+      span: 100%;
+      height: 200px;
     };
+
+    .title{
+      display: flex;
+      align-items: center;
+    }
   </style>
 </head>
 <body>
@@ -23,10 +30,17 @@
   <h1>All Available Maps</h1>    
   </div>
 
-    <p>Maps</p>
+    <h2 class="title"><p>Maps</p></h2>
+
+    <ol>
+      <li>Stanley Park</li>
+      <li>Burnaby</li>
+      <li>Gastown</li>
+      <li>Downtown</li>
+    </ol>
 
     <p>
-      <a href="#" class="btn btn-default btn-lg" role="button"></a>
+      <button class="button"><a href="#" class="btn btn-default btn-lg" role="button"></a></button>
     </p>
   </div>
   <% include ./partials/nav-bar.ejs %>
