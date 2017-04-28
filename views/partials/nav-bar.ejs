@@ -1,5 +1,21 @@
+<<<<<<< HEAD:views/partials/_navbar.ejs
 
   <div class="loggedas"><%= first_name %> <%= last_name%></div>
+=======
+<!doctype html>
+<head>
+  <div class="loggedas">
+     <% if (user_id) { %>
+    	<p>Logged in as: <%= user_id %></p>
+      <form action="/logout" method="POST">
+      <input type="submit" value="Logout">
+      </form>
+      <a href="/maps/new">Create New Map</a>
+    <% } else{ %>
+    <a href="/login">Login</a>
+    <% } %>
+  </div>
+>>>>>>> 8c927ddfea42588c61ab017da5b846d6cb8c55be:views/partials/nav-bar.ejs
   <html lang="en">
   <link rel="stylesheet" href="/styles/_navbar.css" type="text/css" />
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" />
