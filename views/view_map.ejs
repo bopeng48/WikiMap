@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+    <title>All Maps</title>
+    <!-- Google Maps API -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyByuZxNssj0nyeSGfXEocERUoTWNanfawk&callback=initMap"
+   async defer></script> 
+  </head>
+  <style>
+  .mock{
+    display: flex;
+    justify-content: center;
+        align-self: flex-end;
+  }
+
+  .newmap {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+    align-items: flex-end;
+  }
+  </style>
+
+
+  <body>
+    <% include ./partials/nav-bar.ejs %>
+    
+    
+    <a href="/profile">Profile</a> <br>
+    <a href="/logout">Logout</a><br>
+    <div id="create-map">
+    <button class="newmap" href="/init_map"><a>Create New Map</a></div></button>
+
+    <div class="mock"><img src="http://assets.vancouversports.com/images/profile-map/trillium-park-vancouver.png"></div>
+  </body>
+</html>

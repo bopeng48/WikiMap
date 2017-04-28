@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
+<title>Profile Page</title>
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+</head>
+<body>
+<style>
+.maplists {
+  display: flex;
+  justify-content: space-around;
+ align-items: flex-end;
+ 
+}
+
+.maps {
+  display: flex;
+  justify-content: center;
+}
+
+</style>
+ <header>
+   <% include ./partials/nav-bar.ejs %>
+ </header>
+ 
+ <div class="profile-container">
+
+  <div class="page-header text-center">
+    <h1>Profile Page</h1>
+    <a href="/logout">Logout</a>
+    <a href="/map">Map</a>
+  </div>
+
+  <h1 class="username"><%= username %></h1>
+  </div>
+
+  <div class="row">
+    <img id="profilePic" src="<%= picture %>"/>
+
+    <p>User ID: <%= user_id %></p>
+    <p>E-mail: <%= email %></p>
+    <p>First Name: <%= first_name %></p>
+    <p>Last Name: <%= last_name %></p>
+  </div>
+
+
+<h1 class="maps">Maps</h1>
+  <div class="maplists">
+  
+    <h3>My Contribution</h3>
+    <p id="contributed"></p>
+    <h3>Favourites</h3>
+    <p id="favourites"></p>
+    <h3>Created</h3>
+    <p id="created"></p>
+  </div>
+  </body>
+</html>
