@@ -62,6 +62,7 @@ const users = {
   },
 };
 
+
 // Mount all resource routes
 app.use("/api/users", usersRoutes(knex));
 
@@ -84,8 +85,6 @@ app.post ("/logout", (req, res) => {
 app.get("/", (req, res) => {
   res.render("all_maps");
 });
-
-
 
 // Delete a single map
 app.post ("/maps/:map_id/delete", auth, (req, res) => {
