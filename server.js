@@ -82,7 +82,9 @@ app.post ("/logout", (req, res) => {
 
 // Homepage (all maps) 
 app.get("/", (req, res) => {
-  res.render("all_maps");
+  const user_id = req.session.user_id;
+  const templateVars = { user_id };
+  res.render("all_maps", templateVars);
 });
 
 
@@ -113,7 +115,9 @@ app.post ("/maps/new", auth, (req, res) => {
 
 // Single map page
 app.get ("/maps/:map_id", (req, res) => {
-  res.render("view_map")
+  const user_id = req.session.user_id;
+  const templateVars = { user_id };
+  res.render("view_map", templateVars);
 });
 
 // // Renders new map with starting parameters
