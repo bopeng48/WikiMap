@@ -5,10 +5,14 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyByuZxNssj0nyeSGfXEocERUoTWNanfawk&callback=initMap"
-   async defer></script> 
+    async defer></script> 
+    <% include ./partials/nav-bar.ejs %>
+
   </head>
-<style>
-.titles {
+
+  
+<style> 
+.title {
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -26,11 +30,10 @@
 
   <body>
     <%- include('partials/nav-bar.ejs') %>
-    <div class="titles">
     <div class="title"><h1>Title</h1></div>
     <div class="description"><h1>Description</h1></div>
     <!-- Google Maps API -->
-   </div>
+
   <div class="mock"><img src="http://assets.vancouversports.com/images/profile-map/trillium-park-vancouver.png"></div>
 
   </body>

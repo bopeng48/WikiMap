@@ -1,0 +1,43 @@
+.nav-bar {
+  position: fixed;
+  height: 80px;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: linear-gradient(20deg, indianred, darkred 20%, darkslateblue);
+  color: black;
+  padding: 0px 2em;
+  z-index: 5;
+}
+
+#nav-bar .button {
+  float: right;
+  margin-top: 12px;
+  border-radius: 10px;
+  height: 55px;
+  border: 1px solid black;
+  color: slateblue;
+  background: black;;
+  opacity: 0.5;
+  font-size: x-large;
+  box-shadow: 0px 5px 15px 5px;
+  padding-right: 10px;
+  border-radius: 20px 20px 10px 10px;
+
+  }
+
+#nav-bar .button:hover {
+  box-shadow: 0px 3px 30px 10px;
+  opacity: 1; 
+  }
+
+#nav-bar .logo {
+  float: left;
+  height: 80px;
+  width: 80px;
+  margin-right: 10px; }
+
+#nav-bar .header {
+  float: left;
+  font-size: 200%;
+  line-height: 200%; }

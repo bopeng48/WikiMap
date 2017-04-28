@@ -1,11 +1,11 @@
 <!doctype html>
-<nav id="nav-bar">
+<nav class="nav-bar">
 <html lang="en">
 <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
-<link rel="stylesheet" href="/styles/nav.css" type="text/css" />
+<link rel="stylesheet" href="/styles/nav-bar.css" type="text/css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" />
 <meta charset="UTF-8">
- <div class="nav">
+ <div class="nav-bar">
  <div class="loggedas">
      <% if (user_id) { %>
     	<p>Logged in as: <%= user_id %></p>
@@ -17,8 +17,10 @@
     <a href="/login">Login</a>
     <% } %>
       <ul>
-        <li><div class="homepage" href="/all_maps">Homepage</div></li>
-        <li><div class="exploremaps" href="/all_maps">Explore Maps</div></li>
+        <li><h3><div class="logout"><a href="/logout">Logout</a></div></h3></li>
+        <li><h3><div class="homepage"><a href="/homepage">Homepage</a></div></h3></li>
+        <li><h3><div class="new-map"><a href="/new-map">Create New Map</a></div></h3></li>
+        <li><h3><div class="exploremaps"> <a href="/mapslist">Explore Maps</div></a></h3></li>
       </ul>
   </div>
     </html>
