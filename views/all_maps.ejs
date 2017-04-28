@@ -12,12 +12,17 @@
       background-color: red;
       color: black;
       span: 100%;
-      height: 200px;
-    };
+          };
 
     .title{
       display: flex;
       align-items: center;
+    }
+
+    .list {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
     }
   </style>
 </head>
@@ -32,11 +37,13 @@
 
     <h2 class="title"><p>Maps</p></h2>
 
-    <ol>
+    <ol class="list">
+    <h4>
       <a href="https://www.google.ca/maps/place/Stanley+Park/@49.3017049,-123.143889,17z/data=!3m1!4b1!4m5!3m4!1s0x5486718cad26e4a3:0x364a639db409e216!8m2!3d49.3017049!4d-123.1417003"><li>Stanley Park</li></a>
       <a href="https://www.google.ca/maps/place/Burnaby,+BC/@49.2399648,-123.028209,12z/data=!3m1!4b1!4m5!3m4!1s0x548677a8219c8373:0xdd0a72738752b169!8m2!3d49.2488091!4d-122.9805104"><li>Burnaby</li>
       <a href="https://www.google.ca/maps/place/Gastown,+Vancouver,+BC/@49.2832583,-123.1101131,16z/data=!3m1!4b1!4m5!3m4!1s0x54867177614ef47b:0xd1fea64d6d378461!8m2!3d49.2828082!4d-123.1066875"><li>Gastown</li></a>
       <a href="https://www.google.ca/maps/place/Downtown,+Vancouver,+BC/@49.2802089,-123.1265343,15z/data=!3m1!4b1!4m5!3m4!1s0x5486717f41ba2fb1:0xc6952794560a44aa!8m2!3d49.281954!4d-123.1170744"><li>Downtown</li></a>
+      </h4>
     </ol>
 
     <p>
