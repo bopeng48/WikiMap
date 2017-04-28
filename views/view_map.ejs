@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <% include ./partials/_navbar %>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
@@ -10,10 +11,13 @@
    async defer></script> 
   </head>
   <style>
-  .mock{
+  .test {
     display: flex;
-    justify-content: center;
-        align-self: flex-end;
+
+    height: 400px;
+    width: 600px;
+    padding: 25px;
+    float: right;
   }
 
   .newmap {
@@ -22,18 +26,45 @@
     justify-content: center;
     align-items: flex-end;
   }
+
+  .title{
+    display: flex;
+    justify-content: center;
+    font-size: x-large;
+    height: inherit;
+    
+    
+  }
+
+  .list {
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: space-between;
+    padding-left: 90px;
+  }
+
+ .header{
+   height: 100px;
+   background-color: red;
+ }  
   </style>
+  <header class="header"></header>
 
 
   <body>
-    <% include ./partials/nav-bar.ejs %>
     
     
-    <a href="/profile">Profile</a> <br>
-    <a href="/logout">Logout</a><br>
-    <div id="create-map">
-    <button class="newmap" href="/init_map"><a>Create New Map</a></div></button>
+    <div class="title"><h1>Map Title</h1></div>
+    <img class="test" src="http://assets.vancouversports.com/images/profile-map/trillium-park-vancouver.png">
+    <div>
+      <ol class="list">
+        <li><h2>Caveman Cafe</h2></li>
+        <li><h2>McDonalds</h2></li>
+        <li><h2>The Pint</h2></li>
+        <li><h2>Tinsel Town</h2></li>
+      </ol>
+    </div>
 
-    <div class="mock"><img src="http://assets.vancouversports.com/images/profile-map/trillium-park-vancouver.png"></div>
+
   </body>
 </html>
