@@ -5,9 +5,12 @@
     <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
     <title>Single Map</title>
-    <!-- Google Maps API -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyByuZxNssj0nyeSGfXEocERUoTWNanfawk&callback=initMap"
-   async defer></script> 
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyByuZxNssj0nyeSGfXEocERUoTWNanfawk&amp;callback=initMap">
+    </script>
+    <script type="text/javascript" src="/scripts/load_map.js"></script>
+    
+  
   </head>
   <style>
   .mock{
@@ -26,14 +29,25 @@
 
 
   <body>
-   <!--nav bar-->
     
-    
+    <!--incl header-->
     <a href="/profile">Profile</a> <br>
     <a href="/logout">Logout</a><br>
     <div id="create-map">
     <button class="newmap" href="/init_map"><a>Create New Map</a></div></button>
 
-    <div class="mock"><img src="http://assets.vancouversports.com/images/profile-map/trillium-park-vancouver.png"></div>
+      
+    
+    <div class="title"><h1>Map Title</h1></div>
+    <div id='map' style="width: 500px; height: 400px;"></div>
+    
+    <div>
+      <ol class="list">
+        <li><h2>Caveman Cafe</h2></li>
+        <li><h2>McDonalds</h2></li>
+        <li><h2>The Pint</h2></li>
+        <li><h2>Tinsel Town</h2></li>
+      </ol>
+    </div>
   </body>
 </html>

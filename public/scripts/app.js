@@ -1,3 +1,5 @@
+$(document).ready(() => {
+
 $(() => {
   $.ajax({
     method: "GET",
@@ -8,3 +10,6 @@ $(() => {
     }
   });;
 });
+
+
+}); /// do not delete these
