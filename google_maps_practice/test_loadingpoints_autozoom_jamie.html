@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+  <title>Google Maps Multiple Markers</title>
+  <script src="http://maps.google.com/maps/api/js?sensor=false"
+          type="text/javascript"></script>
+</head>
+<body>
+  <div id='map' style="width: 500px; height: 400px;"></div>
+
+  <script type="text/javascript">
+   // Point array format: [Name, lat, lng, z-index]
+    var locations = [
+      ['Boathouse Restaurant', 49.2742939, -123.1558585, 3],
+      ['Fable Kitchen', 49.2679601, -123.1511973, 4],
+      ['Bistro Pastis', 49.268274, -123.1545482, 2],
+      ['Le Crocodile', 49.2812985, -123.132692, 1],
+      ['Falconetti\'s', 49.2691439, -123.0718541, 5],
+    ];
+
+    //mapper.js
+
+    $() {
+
+      addDataPoints() {
+        //clearpoints
+        //ajaxToGetData((data) =>
+
+        for (location in data) {
+          addPoint(location)
+        }
+
+      }
+
+      addDataPoints();
+
+
+    }
+
+    window.map = new google.maps.Map(document.getElementById('map'), {
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+    });
+
+    var infowindow = new google.maps.InfoWindow();
+
+    var bounds = new google.maps.LatLngBounds();
+
+    var marker, i, infoWindowContent;
+
+    for (i = 0; i < locations.length; i++) {
+      marker = new google.maps.Marker({
+        position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+        //label: 'i',
+        map: map
+      });
+
+      bounds.extend(marker.position);
+
+      google.maps.event.addListener(marker, 'click', (function(marker, i) {
+        return function() {
+          //sets content of info window to first object of marker array, e.g 'Boathouse Rest'
+          infoWindowContent = (locations[i][0] + ' description image');
+          infowindow.setContent(infoWindowContent);
+          infowindow.open(map, marker);
+        }
+      })(marker, i));
+    }
+
+    map.fitBounds(bounds);
+  </script>
+</body>
+</html>
