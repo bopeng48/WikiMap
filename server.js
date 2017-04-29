@@ -56,6 +56,8 @@ const auth = (req, res, next) => {
   }
 };
 
+
+// fake user database for testing
 const users = {
   user1: {
     id: 'user1',
@@ -63,6 +65,37 @@ const users = {
     password: 'purple', // purple (for testing)
   },
 };
+
+// fake array of map objects for testing
+const map5 = [
+
+{
+title: 'Boathouse Restaurant',
+description: 'a restaurant without houses or boats',
+img: 'tbd',
+lat: 49.2742939,
+long: -123.1558585
+},
+
+{
+title: 'Fable Kitchen',
+description: 'farm to table snacks',
+img: 'tbd',
+lat: 49.2679601,
+long: -123.1511973,
+},
+
+{
+title: 'Le Crocodile',
+description: 'reptiles for dinner',
+img: 'tbd',
+lat: 49.2812985,
+long: -123.132692,
+}
+
+];
+
+console.log(map5[1]);
 
 // Mount all resource routes
 app.use("/api/users", usersRoutes(knex));
@@ -94,8 +127,6 @@ app.get("/", (req, res) => {
   (reason)=> {console.log(reason);});
   res.render("all_maps", templateVars);
 });
-
-
 
 // Delete a single map
 app.post ("/maps/:map_id/delete", auth, (req, res) => {
