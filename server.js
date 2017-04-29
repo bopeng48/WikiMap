@@ -144,6 +144,7 @@ app.post ("/maps/new", auth, (req, res) => {
 
 // Single map page
 app.get ("/maps/:map_id", (req, res) => {
+  
   res.render("view_map")
 });
 
