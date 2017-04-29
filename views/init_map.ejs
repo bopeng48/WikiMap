@@ -6,6 +6,8 @@
   <meta charset="UTF-8">
   <title>Map Info</title>
   <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyByuZxNssj0nyeSGfXEocERUoTWNanfawk&libraries=places"></script>
+  <script type="text/javascript" src="/scripts/location_search.js"></script>
 </head>
 <style>
 .create {
@@ -41,7 +43,7 @@ margin-left: 80px;
 
 <body>
 <%- include('partials/nav-bar.ejs') %>
-<form action="/map_info" method="post"></form>
+<!--<form action="/map_info" method="post"></form>
   <p><h3>Please enter the title of your map: </h3>
     <type="text" size="20" maxlength="30" />
   </p>
@@ -54,9 +56,30 @@ margin-left: 80px;
   <p>
     <h3>Please enter the starting location: </h3>
     <type="text" size="20" maxlength="50" />
+    <input id="locationName" name="locationName" type="text">
   </p>
-  <textarea name="start" placeholder="Starting Location..."></textarea>
-  <button class="create" value="Create"><a href="/maps/:map_id">Create</button></a>
+  <form action="/maps/new" method="POST">
+      <input type="submit" value="Create Map">
+  </form>-->
+  <form action="/maps/new" method="post">
+  <p><h3>Please enter the title of your map: </h3>
+    <type="text" size="20" maxlength="30" />
+  </p>
+  <textarea class="title" placeholder="Title..."></textarea>
+  <p>
+    <h3>Please enter the description of your map: </h3>
+    <type="text" size="20" maxlength="200" />
+  </p>
+  <textarea name="description" placeholder="Description..."></textarea>  
+  <p>
+    <h3>Please enter the starting location: </h3>
+    <type="text" size="20" maxlength="50" />
+    <input id="locationName" name="locationName" type="text">
+  </p>
+  <input type="hidden" id="placeId" name="placeId" />
+    <input type="submit" value="Create Map">
+  </form>
+
 </body>
 
 </html>
