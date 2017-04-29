@@ -1,7 +1,7 @@
 module.exports = function makeDataHelpers(knex) {
   return {
     getMapNames: function(success, failure) {
-      knex.select("naw").from("maps").
+      knex.select("title").from("maps").
       then(
         function(result) {
         success(result);
@@ -17,6 +17,33 @@ module.exports = function makeDataHelpers(knex) {
         function(result) {
         success(result);
       }).
+      catch(
+        function(reason) {
+          failure(reason);
+        })
+    },
+    addPoints: function(info, success, failure) {
+      knex('points').insert({title: info.title,
+       description: info.description, img: info.img,
+        map_id: info.map_id, lat: info.lat, long: info.long,
+         user_id: info.user_id}).
+      then(
+        function(result) {
+          success(result);
+        }).
+      catch(
+        function(reason) {
+          failure(reason);
+        })
+    },
+    findUserByEmail: function(info, success, failure) {    // autheticates user credential
+      knex('users').select('id', 'password')
+      .where({email: info.email})   // where email = info.email
+      .limit(1).
+      then(
+        function(result) {
+          success(result);
+        }).
       catch(
         function(reason) {
           failure(reason);
