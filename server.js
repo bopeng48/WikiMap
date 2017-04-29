@@ -17,7 +17,7 @@ const knexLogger  = require('knex-logger');
 
 // Seperated Routes for each Resource
 const usersRoutes = require("./routes/users");
-
+const createNewMap = require("./public/scripts/create_new_map");
 const database = require('./db/DB_helper')(knex);
 
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
@@ -95,8 +95,6 @@ long: -123.132692,
 
 ];
 
-console.log(map5[1]);
-
 // Mount all resource routes
 app.use("/api/users", usersRoutes(knex));
 
@@ -136,29 +134,56 @@ app.get ("/maps/new", auth, (req, res) => {
   res.render ("init_map");
 });
 
+//saveToDB = require('db/myGreatSaveFunc')
+//while bo is working on saveToDB I will use a mock function
+function saveToDB(whatToStoreInDB, callback) {
+  callback(1);
+  return 
+}
+
 //Submits form with new map information
 app.post ("/maps/new", auth, (req, res) => {
+ 
   // ----- creates new map row in database with form info
+  var locationName = req.body.locationName;
+  var placeId = req.body.placeId;
+  const user_id = req.session.user_id;
+  var myData = {
+    user_id : user_id,
+    locationName: locationName,
+    placeId : placeId
+  };
+  res.render('create_map', {PI: myData});
+});
+
+// getFromDB
+function getFromDB(ID, callback) {
+  callback({
+    googlePlaceId: "ChIJzbK8vXDWTIgRlaZGt0lBTsA"
+  });
+}
+
+// Renders new map with starting parameters
+app.get ("/maps/:map_id/edit", auth, (req, res) => {
   const user_id = req.session.user_id;
   const templateVars = { user_id };
-  //---- submit form
-  //const newMapId = 'map id from database';
-  res.render ("create_map", templateVars);
+  const myMapID = req.params.map_id;
+  const placeId = req.body.place_id;
+  res.render('create_map');
 });
 
 // Single map page
 app.get ("/maps/:map_id", (req, res) => {
   const user_id = req.session.user_id;
-  const templateVars = { user_id };
-  res.render("view_map", templateVars);
+
+  getFromDB(req.params.map_id, (dataFromDB) =>{
+    const templateVars = { user_id, googlePlaceId: dataFromDB.googlePlaceId };
+    res.render("view_map", templateVars);
+  });
 });
 
-// // Renders new map with starting parameters
-// app.post ("/maps/:id/edit", auth, (req, res) => {
-//   const user_id = req.session.user_id;
-//   const templateVars = { user_id };
-//   res.redirect(`/maps/${newMapId}`)
-// });
+
+
 
 // Add a point to a map
 app.post ("/maps/:map_id/points", auth, (req, res) => {
