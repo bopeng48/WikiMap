@@ -1,6 +1,7 @@
 <!doctype html>
 <head>
-  
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
   <html lang="en">
   <link rel="stylesheet" href="/styles/nav-bar.css" type="text/css" />
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" />
@@ -10,35 +11,72 @@
     display: flex;
     flex-direction: row-reverse;
     justify-content: space-around;
-    margin: 15px;
-    height: inherit;
-    background-color: red;
-    color: black;
+   
+    height: auto;
+    background-image: -webkit-linear-gradient(top,#d9534f 0,#c12e2a 100%);
+    background-image: linear-gradient(to bottom, #d9534f 0, #c12e2a 100%)
+    
   }
   .loggedas {
     display: flex;
     margin-left: -100px;
   }
+
+  .logout {
+    color: white;
+  }
+
+    .homepage{
+      color: white;
+    }
+
+    .newmap {
+      color: white;
+    }
+
+    .profile {
+      color: white;
+    }
   </style>
 
 <body>
   <nav>
     <div>
       <ul id="nav-bar">
-      
-      
+                      
+        <a href="/logout"><button class="btn btn-danger" type="submit">
+        <p class="logout">
+        <h3>Logout</h3>
+        </p>
+        </button></a>
+        
+        <a href="/"><button class="btn btn-danger" href="/">
+        <p class="homepage">
+        <h3>Homepage</h3>
+        </p>
+        </button></a>
 
-        <h3><div class="logout"><a href="/logout">Logout</a></div></h3>
-        <h3><div class="homepage"><a href="/">Homepage</a></div></h3>
-        <h3><div class="new-map"><a href="/maps/new">Create New Map</a></div></h3>
-        <h3><div class="Profile"> <a href="/users/:id">Profile</div></a></h3>
-        <h3><% if (user_id) { %>
-    	    <p class="loggedas"><%= user_id %></p>
+        <a href="/maps/new"><button class="btn btn-danger" type="submit">
+        <p class="newmap">
+        <h3>Create New Map</h3>
+        </p>
+        </button></a>
+                
+        <a  href="/users/:id"><button class="btn btn-danger" type="submit">
+        <p class="profile">
+        <h3>Profile</h3>
+        </p>
+        </button></a>
+        
+        <h3>
+        <% if (user_id) { %>
+    	  <p class="loggedas"><%= user_id + '!' %></p>
           </form>
-          <% } else{ %>
-          <a href="/login">Login</a>
+          <% } else { %>
+          <a href="/">Login</a>
           <% } %>
         </h3>
+        <div><script src="/scripts/greeting.js"></script> </div>
       </ul>
     </div>
   </nav>
