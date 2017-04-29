@@ -11,13 +11,31 @@
 .create {
 display: flex;
 align-items: flex-end;
-size:
+margin-left: 80px;
 }
 
 .title {
+display: flex;
 flex-direction: row-reverse;
 justify-content: center;
 align-items: flex-end;
+margin-left: 80px;
+}
+
+.description {
+display: flex;
+flex-direction: row-reverse;
+justify-content: center;
+align-items: flex-end;
+margin-left: 80px;
+}
+
+.start {
+display: flex;
+flex-direction: row-reverse;
+justify-content: center;
+align-items: flex-end;
+margin-left: 80px;
 }
 </style>
 
@@ -38,7 +56,7 @@ align-items: flex-end;
     <type="text" size="20" maxlength="50" />
   </p>
   <textarea name="start" placeholder="Starting Location..."></textarea>
-  <button class="create" value="Create"><a href="/Users/fntcguest/lighthouse/midterm/wikimap/views/view_map.ejs"">Create</button></a>
+  <button class="create" value="Create"><a href="/maps/:map_id">Create</button></a>
 </body>
 
 </html>

@@ -1,16 +1,6 @@
 <!doctype html>
 <head>
-  <div class="loggedas">
-     <% if (user_id) { %>
-    	<p>Logged in as: <%= user_id %></p>
-      <form action="/logout" method="POST">
-      <input type="submit" value="Logout">
-      </form>
-      <a href="/maps/new">Create New Map</a>
-    <% } else{ %>
-    <a href="/login">Login</a>
-    <% } %>
-  </div>
+  
   <html lang="en">
   <link rel="stylesheet" href="/styles/nav-bar.css" type="text/css" />
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" />
@@ -25,17 +15,30 @@
     background-color: red;
     color: black;
   }
+  .loggedas {
+    display: flex;
+    margin-left: -100px;
+  }
   </style>
-</head>
 
 <body>
   <nav>
     <div>
       <ul id="nav-bar">
+      
+      
+
         <h3><div class="logout"><a href="/logout">Logout</a></div></h3>
-        <h3><div class="homepage"><a href="/Users/fntcguest/lighthouse/midterm/wikimap/views/all_maps.ejs">Homepage</a></div></h3>
-        <h3><div class="new-map"><a href="/Users/fntcguest/lighthouse/midterm/wikimap/views/init_map.ejs">Create New Map</a></div></h3>
-        <h3><div class="exploremaps"> <a href="/Users/fntcguest/lighthouse/midterm/wikimap/views/all_maps.ejs">Explore Maps</div></a></h3>
+        <h3><div class="homepage"><a href="/">Homepage</a></div></h3>
+        <h3><div class="new-map"><a href="/maps/new">Create New Map</a></div></h3>
+        <h3><div class="Profile"> <a href="/users/:id">Profile</div></a></h3>
+        <h3><% if (user_id) { %>
+    	    <p class="loggedas"><%= user_id %></p>
+          </form>
+          <% } else{ %>
+          <a href="/login">Login</a>
+          <% } %>
+        </h3>
       </ul>
     </div>
   </nav>

@@ -20,6 +20,24 @@
   justify-content: center;
 }
 
+.row {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  padding: 10px;
+}
+
+.username {
+  display: flex;
+  padding: 10px;
+  font-size: -webkit-xxx-large
+}
+
+#contributed {
+  display: flex;
+
+}
+
 </style>
  <header>
      <%- include('partials/nav-bar.ejs') %>
@@ -29,15 +47,13 @@
 
   <div class="page-header text-center">
     <h1>Profile Page</h1>
-    <a href="/logout">Logout</a>
-    <a href="/map">Map</a>
+    
   </div>
 
   <h1 class="username"><%= username %></h1>
   </div>
 
   <div class="row">
-    <img id="profilePic" src="<%= picture %>"/>
 
     <p>User ID: <%= username %></p>
     <p>E-mail: <%= email %></p>
@@ -48,13 +64,30 @@
 
 <h1 class="maps">Maps</h1>
   <div class="maplists">
-  
+    <div> 
     <h3>My Contribution</h3>
     <p id="contributed"></p>
+    <h4>Maps by Kale</h4>
+    <h4>Rileys List</h4>
+    <h4>Haileys Favourites</h4>
+    <h4>Arias Eateries</h4>
+    </div>
+    <div>
     <h3>Favourites</h3>
     <p id="favourites"></p>
+    <h4>Gastown</h4>
+    <h4>Burnaby</h4>
+    <h4>Stanley Park</h4>
+    <h4>Robson Street</h4>
+    </div>
+    <div>
     <h3>Created</h3>
     <p id="created"></p>
+    <h4>Best Benches</h4>
+    <h4>Great Food</h4>
+    <h4>Filming Locations</h4>
+    <h4>Best Scenic Routes</h4>
+    </div>
   </div>
   </body>
 </html>
