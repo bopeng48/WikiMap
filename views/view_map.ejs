@@ -12,9 +12,12 @@
     <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyByuZxNssj0nyeSGfXEocERUoTWNanfawk&amp;callback=initMap">
     </script>
+    <!--<script> 
+      var dataPoints = <'%'= JSON.stringify(dataPoints) '%'>
+    </script>-->
+
     <script type="text/javascript" src="/scripts/load_map.js"></script>
-    
-  
+
   </head>
   <style>
   .test {
@@ -38,8 +41,7 @@
     justify-content: center;
     font-size: x-large;
     height: inherit;
-    
-    
+
   }
 
   .list {
@@ -55,42 +57,18 @@
        }
 
   </style>
-  
-
-
   <body>
-    <%- include('partials/nav-bar.ejs') %>    
-  
+    <%- include('partials/nav-bar.ejs') %>
+
     <a href="/profile">Profile</a> <br>
     <a href="/logout">Logout</a><br>
     <div id="create-map">
     <button class="newmap" href="/init_map"><a>Create New Map</a></div></button>
 
-      
-    
     <div class="title"><h1>Map Title</h1></div>
-<<<<<<< HEAD
-    <h3>My Google Maps Demo</h3>
-    <div id="map"></div>
-    <script>
-      function initMap() {
-        var uluru = {lat: -25.363, lng: 131.044};
-        var map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 4,
-          center: uluru
-        });
-        var marker = new google.maps.Marker({
-          position: uluru,
-          map: map
-        });
-      }
-    </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyByuZxNssj0nyeSGfXEocERUoTWNanfawk&callback=initMap"
-   async defer></script
-=======
+
     <div id='map' style="width: 500px; height: 400px;"></div>
-    
->>>>>>> e3b30ad7d61988c3bbe4973c946342ca731893f3
+
     <div>
       <ol class="list">
         <li><h2>Caveman Cafe</h2></li>
@@ -99,13 +77,6 @@
         <li><h2>Tinsel Town</h2></li>
       </ol>
     </div>
-<<<<<<< HEAD
 
-
-<!-- google map api test -->
->
-
-=======
->>>>>>> e3b30ad7d61988c3bbe4973c946342ca731893f3
   </body>
 </html>

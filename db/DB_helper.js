@@ -40,7 +40,11 @@ module.exports = function makeDataHelpers(knex) {
         function(reason) {
           failure(reason);
         })
+    },
+    getPointByMapId: function(id, success, failure) {
+      return knex.select('*').from('points').where('map_id',id);
     }
+
     //select points.title, lat, long from points join users on points.user_id = users.id
     // join maps on points.map_id = maps.id where points.user_id = 1;
   }

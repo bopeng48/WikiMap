@@ -1,43 +1,43 @@
-"use strict";
+
 
 require('dotenv').config();
 
-const PORT        = process.env.PORT || 8080;
-const ENV         = process.env.ENV || "development";
-const express     = require("express");
-const bodyParser  = require("body-parser");
-const sass        = require("node-sass-middleware");
-const app         = express();
+const PORT = process.env.PORT || 8080;
+const ENV = process.env.ENV || 'development';
+const express = require('express');
+const bodyParser = require('body-parser');
+const sass = require('node-sass-middleware');
+
+const app = express();
 const cookieSession = require('cookie-session');
 
-const knexConfig  = require("./knexfile");
-const knex        = require("knex")(knexConfig[ENV]);
-const morgan      = require('morgan');
-const knexLogger  = require('knex-logger');
+const knexConfig = require('./knexfile');
+const knex = require('knex')(knexConfig[ENV]);
+const morgan = require('morgan');
+const knexLogger = require('knex-logger');
 
 // Seperated Routes for each Resource
-const usersRoutes = require("./routes/users");
-const createNewMap = require("./public/scripts/create_new_map");
+const usersRoutes = require('./routes/users');
 const database = require('./db/DB_helper')(knex);
 const decode = require('urldecode');
 
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
 // 'dev' = Concise output colored by response status for development use.
-//         The :status token will be colored red for server error codes, yellow for client error codes, cyan for redirection codes, and uncolored for all other codes.
+// The :status token will be colored red for server error codes, yellow for client error codes, cyan for redirection codes, and uncolored for all other codes.
 app.use(morgan('dev'));
 
 // Log knex SQL queries to STDOUT as well
 app.use(knexLogger(knex));
 
-app.set("view engine", "ejs");
+app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use("/styles", sass({
-  src: __dirname + "/styles",
-  dest: __dirname + "/public/styles",
+app.use('/styles', sass({
+  src: `${__dirname  }/styles`,
+  dest: `${__dirname  }/public/styles`,
   debug: true,
-  outputStyle: 'expanded'
+  outputStyle: 'expanded',
 }));
-app.use(express.static("public"));
+app.use(express.static('public'));
 app.use(cookieSession({
   name: 'session',
   keys: ['RGp47WRqpjnK5Eo'],
@@ -67,45 +67,16 @@ const users = {
   },
 };
 
-// fake array of map objects for testing
-const map5 = [
-
-{
-title: 'Boathouse Restaurant',
-description: 'a restaurant without houses or boats',
-img: 'tbd',
-lat: 49.2742939,
-long: -123.1558585
-},
-
-{
-title: 'Fable Kitchen',
-description: 'farm to table snacks',
-img: 'tbd',
-lat: 49.2679601,
-long: -123.1511973,
-},
-
-{
-title: 'Le Crocodile',
-description: 'reptiles for dinner',
-img: 'tbd',
-lat: 49.2812985,
-long: -123.132692,
-}
-
-];
-
 // Mount all resource routes
-app.use("/api/users", usersRoutes(knex));
+app.use('/api/users', usersRoutes(knex));
 
 // Login route (development only)
-app.get ("/login/:id", (req, res) => {
+app.get('/login/:id', (req, res) => {
   req.session.user_id = req.params.id;
-  res.redirect("/");
+  res.redirect('/');
 });
 
-app.post ("/logout", (req, res) => {
+app.post('/logout', (req, res) => {
   req.session = null;
   res.redirect('/');
 });
@@ -115,9 +86,10 @@ app.post ("/logout", (req, res) => {
 // });
 
 // Homepage (all maps)
-app.get("/", (req, res) => {
+app.get('/', (req, res) => {
   const user_id = req.session.user_id;
   const templateVars = { user_id };
+<<<<<<< HEAD
 <<<<<<< HEAD
   const mapList = { maps: mapList }
   var info = {
@@ -138,104 +110,115 @@ app.get("/", (req, res) => {
 
   res.render("all_maps", templateVars);
 >>>>>>> dfb8a7281e72bbfc0c37352df3c22829ecc57dc6
+=======
+  const prom = database.getMapNames();
+  prom.then((val) => {
+    console.log('value returned is: ', val);
+  }).catch((reason) => {
+    console.log(reason);
+  });
+
+
+  res.render('all_maps', templateVars);
+>>>>>>> 6d642f17e0367e32db9d8aa0deb8ed856384dcfb
 });
 
 // Delete a single map
-app.post ("/maps/:map_id/delete", auth, (req, res) => {
+app.post('/maps/:map_id/delete', auth, (req, res) => {
   const map = req.params.map_id;
-  //------ delete from database ------;
-  res.redirect("/");
+  // ------ delete from database ------;
+  res.redirect('/');
 });
 
 // Renders form for entering new map starting parameters
-app.get ("/maps/new", auth, (req, res) => {
+app.get('/maps/new', auth, (req, res) => {
   const user_id = req.session.user_id;
   const templateVars = { user_id };
-  res.render ("init_map");
-})
+  res.render('init_map', templateVars);
+});
 
-//saveToDB = require('db/myGreatSaveFunc')
-//while bo is working on saveToDB I will use a mock function
-function saveToDB(whatToStoreInDB, callback) {
-  callback(1);
-  return
-}
-
-//Submits form with new map information
-app.post ("/maps/new", auth, (req, res) => {
-
+// Submits form with new map information
+app.post('/maps/new', auth, (req, res) => {
   // ----- creates new map row in database with form info
-  var locationName = req.body.locationName;
-  var placeId = req.body.placeId;
+  const locationName = req.body.locationName;
+  const placeId = req.body.placeId;
   const user_id = req.session.user_id;
-  var myData = {
-    user_id : user_id,
-    locationName: locationName,
-    placeId : placeId
+  let myData = {
+    user_id,
+    locationName,
+    placeId,
   };
-
-  res.render('create_map', {myData: placeId});
+  res.render('create_map', { myData: placeId });
 });
 
 
 // Renders new map with starting parameters
-app.get ("/maps/:map_id/edit", auth, (req, res) => {
+app.get('/maps/:map_id/edit', auth, (req, res) => {
   const user_id = req.session.user_id;
   const templateVars = { user_id };
   const myMapID = req.params.map_id;
   const placeId = req.body.place_id;
-  res.render('create_map');
+  res.render('create_map', templateVars);
 });
 
 // Single map page
-app.get ("/maps/:map_id", (req, res) => {
+app.get('/maps/:map_id', (req, res) => {
   const user_id = req.session.user_id;
+  const map_id = req.params.map_id;
+  const templateVars = { user_id };
+  res.render('view_map', templateVars);
+});
 
-  getFromDB(req.params.map_id, (dataFromDB) =>{
-    const templateVars = { user_id, googlePlaceId: dataFromDB.googlePlaceId };
-    res.render("view_map", templateVars);
+// Fetch info from database
+app.get('/maps/:map_id/json', (req, res) => {
+  const user_id = req.session.user_id;
+  const map_id = req.params.map_id;
+  const prom = database.getPointByMapId(map_id);
+  prom.then((dataFromDB) => {
+    const templateVars = { user_id, dataPoints: dataFromDB };
+    console.log(dataFromDB);
+    res.json(dataFromDB);
+  }).catch((failure_message) => {
+    console.log(failure_message);
   });
 });
 
-
-
-
 // Add a point to a map
-app.post ("/maps/:map_id/points", auth, (req, res) => {
-  console.log("req.body is",req.body);
-  var body = req.body;
-  var input = {title: decode(body.title),
+app.post('/maps/:map_id/points', auth, (req, res) => {
+  console.log('req.body is', req.body);
+  let body = req.body;
+  let input = { title: decode(body.title),
     description: decode(body.description),
-    img: body.img, map_id: body.map_id, lat: body.lat,
-    long: body.long, user_id: body.user_id};
-
-
-
-  database.addPoints((input), function(success_message) {
-    console.log(success_message);}, function(failure_message) {
+    img: body.img,
+    map_id: body.map_id,
+    lat: body.lat,
+    long: body.long,
+    user_id: body.user_id };
+  database.addPoints((input), (success_message) => {
+    console.log(success_message); 
+}, (failure_message) => {
       console.log(failure_message);
     });
-
 });
 
 // Edit a single point on a map
-app.post ("/maps/:map_id/points/:point_id", auth, (req, res) => {
-  //----- makes new changes to point in database ------
+app.post('/maps/:map_id/points/:point_id', auth, (req, res) => {
+  // ----- makes new changes to point in database ------
 });
 
 // Delete a single point on a map
-app.post ("/maps/:map_id/points/:point_id", auth, (req, res) => {
+app.post('/maps/:map_id/points/:point_id', auth, (req, res) => {
   const point = req.params.point_id;
   // ------ deletes point id from database ------
 });
 
 // Single user profile
-app.get ("/users/:id", auth, (req, res) => {
+app.get('/users/:id', auth, (req, res) => {
   const username = req.session.user_id;
   const email = 'user2@example.com';
-  const first_name =  'John';
+  const first_name = 'John';
   const last_name = 'Smith';
-  const templateVars = {username, email, first_name, last_name, picture: 'profilePic' };
+  const templateVars = { username, email, first_name, last_name, picture: 'profilePic' };
 
   // if (user in database) {
   //     res.render ('profile/:id', templateVars);
@@ -243,19 +226,19 @@ app.get ("/users/:id", auth, (req, res) => {
   //     res.status(403).send('You must be logged into view this page.');
   //   }
 
-  res.render ("profile", templateVars);
+  res.render('profile', templateVars);
 });
 
 // Add a map to user favourites
-app.post ("/users/:id/favourites", auth, (req, res) => {
+app.post('/users/:id/favourites', auth, (req, res) => {
   // ------ adds favourite/map combo to database table ----- //
 });
 
 // Un-favourite a map (remove from favourites list)
-app.post ("/users/:id/favourites/:favourite_id/delete", auth, (req, res) => {
+app.post('/users/:id/favourites/:favourite_id/delete', auth, (req, res) => {
   // ------ removes favourite from database ---- //
 });
 
 app.listen(PORT, () => {
-  console.log("Example app listening on port " + PORT);
+  console.log('Example app listening on port ' + PORT);
 });
