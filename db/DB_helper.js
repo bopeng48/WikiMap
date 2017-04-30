@@ -4,15 +4,17 @@ module.exports = function makeDataHelpers(knex) {
       return knex.select("title").from("maps");
     },
     createMap: function(info, success, failure) {
-      knex('maps').insert({title: info.title, description: info.description, user_id: info.user_id}).
-      then(
-        function(result) {
-        success(result);
-      }).
-      catch(
+      return knex('maps')
+      .returning('id')
+      .insert({title: info.title, description: info.description, user_id: info.user_id});
+     /* .then(
+        function(result, id) {
+        success(result, id);
+      })
+      .catch(
         function(reason) {
           failure(reason);
-        })
+        }) */
     },
     addPoints: function(info, success, failure) {
       knex('points').insert({title: info.title,

@@ -4,11 +4,22 @@
   <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
     <meta charset="UTF-8">
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+<<<<<<< HEAD
     
     <%- include('partials/nav-bar.ejs') %>
   </head>
 
 <style> 
+=======
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyByuZxNssj0nyeSGfXEocERUoTWNanfawk&callback=initNewMap"
+    async defer></script>
+     <script type="text/javascript" src="/scripts/create_new_map.js"></script>
+    <%- include('partials/nav-bar.ejs') %>
+  </head>
+
+
+<style>
+>>>>>>> master
 .title {
   display: flex;
   justify-content: flex-start;
@@ -17,28 +28,32 @@
 
 .mock {
   display: flex;
-  
-  flex-wrap: wrap-reverse; 
+
+  flex-wrap: wrap-reverse;
   align-content: space-between;
   justify-content: flex-end;
+}
+
+div.test {
+  display: none;
 }
 </style>
 
   <body>
     <div class='test'> <%= myData %></div>
-    <div class="title"><h1><%= myData %></h1></div>
-    <div class="description"><h1>Description</h1></div>
+    <div class="title"><h1><%= title %></h1></div>
+    <div class="description"><h1><%= description%></h1></div>
     <div id='map' style="width: 500px; height: 400px;"></div>
     <div id="form">
       <table>
       <tr><td>Name:</td> <td><input type='text' id='name'/> </td> </tr>
       <tr><td>Description:</td> <td><input type='text' id='description'/> </td> </tr>
       <tr><td>Image:</td> <td><input type='button' value='Add Image' onclick='add image'/></td></tr>
-                
+      <tr><td></td><td><input type='button' value='Save' onclick='saveData()'/></td></tr>
       </table>
     </div>
     <div id="message">Location saved</div>
-  
+
   <script
       src="https://code.jquery.com/jquery-3.2.1.min.js"
       integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
