@@ -1,17 +1,18 @@
 let marker;
+
 function initNewMap() {
-  const infowindow;
-  const messagewindow;
-  const geocoder = new google.maps.Geocoder();
+  var infowindow;
+  var messagewindow;
+  var geocoder = new google.maps.Geocoder();
 
 
-  const map = new google.maps.Map(document.getElementById('map'), {
+  var map = new google.maps.Map(document.getElementById('map'), {
           // zoom: 8,
           // center: {lat: 40.72, lng: -73.96}
   });
 
-  const placeId = document.getElementsByClassName('test');
-  const placeIdString = placeId['0'].textContent;
+  var placeId = document.getElementsByClassName('test');
+  var placeIdString = placeId['0'].textContent;
   geocoder.geocode({ placeId: placeIdString.slice(1) }, (results, status) => {
     if (results[0]) {
       map.setZoom(13); // to be changed to automatic zoom...somehow
@@ -42,12 +43,12 @@ function initNewMap() {
 }
 
 function saveData() {
-  const name = escape(document.getElementById('name').value);
-  const description = escape(document.getElementById('description').value);
+  var name = escape(document.getElementById('name').value);
+  var description = escape(document.getElementById('description').value);
   // var image = document.getElementById('image').value;
-  const latlng = marker.getPosition();
+  var latlng = marker.getPosition();
 
-  const dat = { title: name,
+  var dat = { title: name,
     description,
     img: 'path/1',
     map_id: 1,
