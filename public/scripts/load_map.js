@@ -1,5 +1,4 @@
 function initMap() {
-
   // var locations = [
   // {
   //   title: 'Boathouse Restaurant',
@@ -23,46 +22,45 @@ function initMap() {
   //   long: -123.132692,
   // }
   // ];
-  
+
   // TODO: why does this not work?
-  //console.log("dataPoints", dataPoints);
+  // console.log("dataPoints", dataPoints);
 
-  var url = `${window.location.pathname}/json`
-  fetch(url).then(res => res.json()).then(locations => {
+  let url = `${window.location.pathname}/json`;
 
+  fetch(url).then(res => res.json()).then((locations) => {
     window.map = new google.maps.Map(document.getElementById('map'), {
-        mapTypeId: google.maps.MapTypeId.ROADMAP
+      mapTypeId: google.maps.MapTypeId.ROADMAP,
     });
 
-    var infowindow = new google.maps.InfoWindow();
+    let infowindow = new google.maps.InfoWindow();
 
-    var bounds = new google.maps.LatLngBounds();
+    let bounds = new google.maps.LatLngBounds();
 
-    var marker, i, infoWindowContent;
+    let marker, i, infoWindowContent;
 
-    function addDataPoints (locations) {
+    function addDataPoints(locations) {
       for (i = 0; i < locations.length; i++) {
         marker = new google.maps.Marker({
           position: new google.maps.LatLng(locations[i].lat, locations[i].long),
-          map: map
+          map,
         });
 
         bounds.extend(marker.position);
 
-        google.maps.event.addListener(marker, 'click', (function(marker, i) {
-          return function() {
-            //sets content of info window to first object of marker array, e.g 'Boathouse Rest'
+        google.maps.event.addListener(marker, 'click', (function (marker, i) {
+          return function () {
+            // sets content of info window to first object of marker array, e.g 'Boathouse Rest'
             infoWindowContent = (locations[i].title + locations[i].description + locations[i].img);
             infowindow.setContent(infoWindowContent);
             infowindow.open(map, marker);
-          }
-        })(marker, i));
+          };
+        }(marker, i)));
       }
     }
 
     addDataPoints(locations);
 
-
     map.fitBounds(bounds);
   });
-};
+}
