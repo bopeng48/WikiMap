@@ -117,13 +117,14 @@ app.post ("/logout", (req, res) => {
 app.get("/", (req, res) => {
   const user_id = req.session.user_id;
   const templateVars = { user_id };
+  const mapList = { maps: mapList }
   var info = {
     title: 'points', description: 'this is point 3',
     img: '/folderpath3', map_id: 1, lat: 50.9090,
     long: -122.145, user_id: 1};
   database.addPoints(info, (result)=> {console.log(result);},
   (reason)=> {console.log(reason);});
-  res.render("all_maps", templateVars);
+  res.render("all_maps", templateVars, mapList);
 });
 
 // Delete a single map
