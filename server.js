@@ -172,7 +172,7 @@ app.post('/maps/:map_id/points', auth, (req, res) => {
     long: body.long,
     user_id: body.user_id };
   database.addPoints((input), (success_message) => {
-    console.log(success_message); 
+    console.log(success_message);
 }, (failure_message) => {
       console.log(failure_message);
     });
