@@ -25,7 +25,12 @@ function initMap() {
   // }
   // ];
 
-  var locations = document.getElementsByClassName('test');
+  var realPoints = document.getElementsByClassName('test');
+  var realRealPoints = JSON.parse(realPoints['0'].textContents);
+  console.log(realRealPoints);
+  var locations = realRealPoints;
+
+  console.log("locations is of type ",typeof locations);
 
   window.map = new google.maps.Map(document.getElementById('map'), {
       mapTypeId: google.maps.MapTypeId.ROADMAP

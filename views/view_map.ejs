@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-      
+
 
     <meta charset="UTF-8">
     <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
@@ -12,8 +12,8 @@
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyByuZxNssj0nyeSGfXEocERUoTWNanfawk&amp;callback=initMap">
     </script>
     <script type="text/javascript" src="/scripts/load_map.js"></script>
-    
-  
+
+
   </head>
   <style>
   .test {
@@ -37,8 +37,8 @@
     justify-content: center;
     font-size: x-large;
     height: inherit;
-    
-    
+
+
   }
 
   .list {
@@ -50,22 +50,22 @@
 
 
   </style>
-  
+
 
 
   <body>
-    <%- include('partials/nav-bar.ejs') %>    
-  
+    <%- include('partials/nav-bar.ejs') %>
+
     <a href="/profile">Profile</a> <br>
     <a href="/logout">Logout</a><br>
     <div id="create-map">
     <button class="newmap" href="/init_map"><a>Create New Map</a></div></button>
 
-      
-    
+
+
     <div class="title"><h1>Map Title</h1></div>
     <div id='map' style="width: 500px; height: 400px;"></div>
-    <div class='test'> <%= dataPoints %></div>
+    <div class='test'> <%= JSON.stringify(dataPoints) %></div>
     <div>
       <ol class="list">
         <li><h2>Caveman Cafe</h2></li>
