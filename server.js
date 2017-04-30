@@ -176,11 +176,11 @@ app.get ("/maps/:map_id/edit", auth, (req, res) => {
 // Single map page
 app.get ("/maps/:map_id", (req, res) => {
   const user_id = req.session.user_id;
-
-  getFromDB(req.params.map_id, (dataFromDB) =>{
-    const templateVars = { user_id, googlePlaceId: dataFromDB.googlePlaceId };
+  const templateVars = { user_id };
+  // getFromDB(req.params.map_id, (dataFromDB) =>{
+  //   const templateVars = { user_id, googlePlaceId: dataFromDB.googlePlaceId };
     res.render("view_map", templateVars);
-  });
+  //});
 });
 
 
