@@ -19,6 +19,7 @@ const knexLogger  = require('knex-logger');
 const usersRoutes = require("./routes/users");
 const createNewMap = require("./public/scripts/create_new_map");
 const database = require('./db/DB_helper')(knex);
+const decode = require('urldecode');
 
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
 // 'dev' = Concise output colored by response status for development use.
@@ -117,6 +118,7 @@ app.post ("/logout", (req, res) => {
 app.get("/", (req, res) => {
   const user_id = req.session.user_id;
   const templateVars = { user_id };
+<<<<<<< HEAD
   const mapList = { maps: mapList }
   var info = {
     title: 'points', description: 'this is point 3',
@@ -125,6 +127,17 @@ app.get("/", (req, res) => {
   database.addPoints(info, (result)=> {console.log(result);},
   (reason)=> {console.log(reason);});
   res.render("all_maps", templateVars, mapList);
+=======
+
+  var prom = database.getMapNames();
+  prom.then(function(val) {
+    console.log("value returned is: ",val);
+  }).catch(function(reason) {
+    console.log(reason);
+  });
+
+  res.render("all_maps", templateVars);
+>>>>>>> dfb8a7281e72bbfc0c37352df3c22829ecc57dc6
 });
 
 // Delete a single map
@@ -139,18 +152,18 @@ app.get ("/maps/new", auth, (req, res) => {
   const user_id = req.session.user_id;
   const templateVars = { user_id };
   res.render ("init_map");
-});
+})
 
 //saveToDB = require('db/myGreatSaveFunc')
 //while bo is working on saveToDB I will use a mock function
 function saveToDB(whatToStoreInDB, callback) {
   callback(1);
-  return 
+  return
 }
 
 //Submits form with new map information
 app.post ("/maps/new", auth, (req, res) => {
- 
+
   // ----- creates new map row in database with form info
   var locationName = req.body.locationName;
   var placeId = req.body.placeId;
@@ -160,15 +173,10 @@ app.post ("/maps/new", auth, (req, res) => {
     locationName: locationName,
     placeId : placeId
   };
-  res.render('create_map', {PI: myData});
+
+  res.render('create_map', {myData: placeId});
 });
 
-// getFromDB
-function getFromDB(ID, callback) {
-  callback({
-    googlePlaceId: "ChIJzbK8vXDWTIgRlaZGt0lBTsA"
-  });
-}
 
 // Renders new map with starting parameters
 app.get ("/maps/:map_id/edit", auth, (req, res) => {
@@ -194,8 +202,20 @@ app.get ("/maps/:map_id", (req, res) => {
 
 // Add a point to a map
 app.post ("/maps/:map_id/points", auth, (req, res) => {
-  //------ adds point info to database -----
-  //------ loads all points on map -----
+  console.log("req.body is",req.body);
+  var body = req.body;
+  var input = {title: decode(body.title),
+    description: decode(body.description),
+    img: body.img, map_id: body.map_id, lat: body.lat,
+    long: body.long, user_id: body.user_id};
+
+
+
+  database.addPoints((input), function(success_message) {
+    console.log(success_message);}, function(failure_message) {
+      console.log(failure_message);
+    });
+
 });
 
 // Edit a single point on a map
