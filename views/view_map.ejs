@@ -11,6 +11,10 @@
     <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyByuZxNssj0nyeSGfXEocERUoTWNanfawk&amp;callback=initMap">
     </script>
+    <!--<script> 
+      var dataPoints = <'%'= JSON.stringify(dataPoints) '%'>
+    </script>-->
+
     <script type="text/javascript" src="/scripts/load_map.js"></script>
 
 
@@ -65,7 +69,6 @@
 
     <div class="title"><h1>Map Title</h1></div>
     <div id='map' style="width: 500px; height: 400px;"></div>
-    <div class='test'> <%= JSON.stringify(dataPoints) %></div>
     <div>
       <ol class="list">
         <li><h2>Caveman Cafe</h2></li>

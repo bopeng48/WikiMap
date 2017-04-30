@@ -1,5 +1,4 @@
 function initMap() {
-  console.log('Google map loaded');
 
   // var locations = [
   // {
@@ -24,47 +23,46 @@ function initMap() {
   //   long: -123.132692,
   // }
   // ];
+  
+  // TODO: why does this not work?
+  //console.log("dataPoints", dataPoints);
 
-  var realPoints = document.getElementsByClassName('test');
-  var realRealPoints = JSON.parse(realPoints['0'].textContents);
-  console.log(realRealPoints);
-  var locations = realRealPoints;
+  var url = `${window.location.pathname}/json`
+  fetch(url).then(res => res.json()).then(locations => {
 
-  console.log("locations is of type ",typeof locations);
+    window.map = new google.maps.Map(document.getElementById('map'), {
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+    });
 
-  window.map = new google.maps.Map(document.getElementById('map'), {
-      mapTypeId: google.maps.MapTypeId.ROADMAP
-  });
+    var infowindow = new google.maps.InfoWindow();
 
-  var infowindow = new google.maps.InfoWindow();
+    var bounds = new google.maps.LatLngBounds();
 
-  var bounds = new google.maps.LatLngBounds();
+    var marker, i, infoWindowContent;
 
-  var marker, i, infoWindowContent;
+    function addDataPoints (locations) {
+      for (i = 0; i < locations.length; i++) {
+        marker = new google.maps.Marker({
+          position: new google.maps.LatLng(locations[i].lat, locations[i].long),
+          map: map
+        });
 
-  function addDataPoints (locations) {
-    for (i = 0; i < locations.length; i++) {
-      marker = new google.maps.Marker({
-        position: new google.maps.LatLng(locations[i].lat, locations[i].long),
-          //label: 'i',
-        map: map
-      });
+        bounds.extend(marker.position);
 
-      bounds.extend(marker.position);
-
-      google.maps.event.addListener(marker, 'click', (function(marker, i) {
-        return function() {
-          //sets content of info window to first object of marker array, e.g 'Boathouse Rest'
-          infoWindowContent = (locations[i].title +locations[i].description + locations[i].img);
-          infowindow.setContent(infoWindowContent);
-          infowindow.open(map, marker);
-        }
-      })(marker, i));
+        google.maps.event.addListener(marker, 'click', (function(marker, i) {
+          return function() {
+            //sets content of info window to first object of marker array, e.g 'Boathouse Rest'
+            infoWindowContent = (locations[i].title + locations[i].description + locations[i].img);
+            infowindow.setContent(infoWindowContent);
+            infowindow.open(map, marker);
+          }
+        })(marker, i));
+      }
     }
-  }
 
-  addDataPoints(locations);
+    addDataPoints(locations);
 
 
-  map.fitBounds(bounds);
+    map.fitBounds(bounds);
+  });
 };

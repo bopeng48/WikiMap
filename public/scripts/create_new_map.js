@@ -7,9 +7,10 @@ var messagewindow;
 var geocoder = new google.maps.Geocoder;
 
 
+
 var map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 8,
-          center: {lat: 40.72, lng: -73.96}
+          //zoom: 8,
+          //center: {lat: 40.72, lng: -73.96}
       });
 
   var placeId = document.getElementsByClassName('test');
@@ -20,6 +21,7 @@ var map = new google.maps.Map(document.getElementById('map'), {
         map.setCenter(results[0].geometry.location);
       };
     });
+
 
   infowindow = new google.maps.InfoWindow({
     content: document.getElementById('form')

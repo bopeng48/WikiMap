@@ -185,24 +185,24 @@ app.get ("/maps/:map_id/edit", auth, (req, res) => {
 // Single map page
 app.get ("/maps/:map_id", (req, res) => {
   const user_id = req.session.user_id;
-
-
   const map_id = req.params.map_id;
+  const templateVars = { user_id };
+    res.render("view_map", templateVars);
+  });
 
+// Fetch info from database
+app.get ("/maps/:map_id/json", (req, res) => {
+  const user_id = req.session.user_id;
+  const map_id = req.params.map_id;
   var prom = database.getPointByMapId(map_id);
-
   prom.then((dataFromDB) =>{
     const templateVars = { user_id, dataPoints: dataFromDB };
     console.log(dataFromDB);
-    res.render("view_map", templateVars);
+    res.json(dataFromDB);
   }).catch((failure_message)=> {
     console.log(failure_message);
   });
-
 });
-
-
-
 
 // Add a point to a map
 app.post ("/maps/:map_id/points", auth, (req, res) => {
