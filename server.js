@@ -159,15 +159,10 @@ app.post ("/maps/new", auth, (req, res) => {
     locationName: locationName,
     placeId : placeId
   };
-  res.render('create_map', {PI: myData});
+
+  res.render('create_map', {myData: placeId});
 });
 
-// getFromDB
-function getFromDB(ID, callback) {
-  callback({
-    googlePlaceId: "ChIJzbK8vXDWTIgRlaZGt0lBTsA"
-  });
-}
 
 // Renders new map with starting parameters
 app.get ("/maps/:map_id/edit", auth, (req, res) => {

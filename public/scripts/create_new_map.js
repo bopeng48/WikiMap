@@ -3,17 +3,22 @@ function initNewMap() {
 var marker;
 var infowindow;
 var messagewindow;
+var geocoder = new google.maps.Geocoder;
 
-var startLocation = {lat: 49.282293, lng: -123.105372};
-var startZoom = 13;
 
-function createMap (startLocation, startZoom) {
-  console.log('Google map created');
+var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 8,
+          center: {lat: 40.72, lng: -73.96}
+      });
 
-  window.map = new google.maps.Map(document.getElementById('map'), {
-    center: startLocation,
-    zoom: 13
-  });
+  var placeId = document.getElementsByClassName('test');
+  var placeIdString = placeId['0'].textContent;
+  geocoder.geocode({'placeId': placeIdString.slice(1)}, function(results, status) {
+      if (results[0]) {
+        map.setZoom(13); // to be changed to automatic zoom...somehow
+        map.setCenter(results[0].geometry.location);  
+      };  
+    });
 
   infowindow = new google.maps.InfoWindow({
     content: document.getElementById('form')
@@ -35,7 +40,6 @@ function createMap (startLocation, startZoom) {
   });
 }
 
-createMap(startLocation);
 
 function saveData() {
   var name = escape(document.getElementById('name').value);
@@ -53,7 +57,6 @@ function saveData() {
   //     loadPoints();
   //   },
   // });  
-};
 
 };
   
