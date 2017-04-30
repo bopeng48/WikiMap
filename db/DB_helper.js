@@ -1,15 +1,7 @@
 module.exports = function makeDataHelpers(knex) {
   return {
     getMapNames: function(success, failure) {
-      knex.select("title").from("maps").
-      then(
-        function(result) {
-        success(result);
-      }).
-      catch(
-      function(reason) {
-        failure(reason);
-      });
+      return knex.select("title").from("maps");
     },
     createMap: function(info, success, failure) {
       knex('maps').insert({title: info.title, description: info.description, user_id: info.user_id}).
