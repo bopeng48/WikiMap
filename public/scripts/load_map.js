@@ -1,29 +1,31 @@
 function initMap() {
   console.log('Google map loaded');
 
-  var locations = [
-  {
-    title: 'Boathouse Restaurant',
-    description: 'a restaurant without houses or boats',
-    img: 'tbd',
-    lat: 49.2742939,
-    long: -123.1558585
-  },
-  {
-    title: 'Fable Kitchen',
-    description: 'farm to table snacks',
-    img: 'tbd',
-    lat: 49.2679601,
-    long: -123.1511973,
-  },
-  {
-    title: 'Le Crocodile',
-    description: 'reptiles for dinner',
-    img: 'tbd',
-    lat: 49.2812985,
-    long: -123.132692,
-  }
-  ];
+  // var locations = [
+  // {
+  //   title: 'Boathouse Restaurant',
+  //   description: 'a restaurant without houses or boats',
+  //   img: 'tbd',
+  //   lat: 49.2742939,
+  //   long: -123.1558585
+  // },
+  // {
+  //   title: 'Fable Kitchen',
+  //   description: 'farm to table snacks',
+  //   img: 'tbd',
+  //   lat: 49.2679601,
+  //   long: -123.1511973,
+  // },
+  // {
+  //   title: 'Le Crocodile',
+  //   description: 'reptiles for dinner',
+  //   img: 'tbd',
+  //   lat: 49.2812985,
+  //   long: -123.132692,
+  // }
+  // ];
+
+  var locations = document.getElementsByClassName('test');
 
   window.map = new google.maps.Map(document.getElementById('map'), {
       mapTypeId: google.maps.MapTypeId.ROADMAP
