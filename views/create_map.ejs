@@ -4,9 +4,7 @@
   <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
     <meta charset="UTF-8">
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyByuZxNssj0nyeSGfXEocERUoTWNanfawk&callback=initNewMap"
-    async defer></script>
-     <script type="text/javascript" src="/scripts/create_new_map.js"></script> 
+    
     <%- include('partials/nav-bar.ejs') %>
   </head>
 
@@ -41,10 +39,12 @@
     </div>
     <div id="message">Location saved</div>
   
-  
   <script
       src="https://code.jquery.com/jquery-3.2.1.min.js"
       integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
       crossorigin="anonymous"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyByuZxNssj0nyeSGfXEocERUoTWNanfawk&callback=initNewMap"
+    async defer></script>
+  <script type="text/javascript" src="/scripts/create_new_map.js"></script> 
   </body>
 </html>
