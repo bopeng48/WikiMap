@@ -119,12 +119,18 @@ app.get("/", (req, res) => {
   const user_id = req.session.user_id;
   const templateVars = { user_id };
 
+
+
   var prom = database.getMapNames();
   prom.then(function(val) {
     console.log("value returned is: ",val);
   }).catch(function(reason) {
     console.log(reason);
   });
+
+
+
+
 
   res.render("all_maps", templateVars);
 });
@@ -179,11 +185,20 @@ app.get ("/maps/:map_id/edit", auth, (req, res) => {
 // Single map page
 app.get ("/maps/:map_id", (req, res) => {
   const user_id = req.session.user_id;
-  const templateVars = { user_id };
-  // getFromDB(req.params.map_id, (dataFromDB) =>{
-  //   const templateVars = { user_id, googlePlaceId: dataFromDB.googlePlaceId };
+
+
+  const map_id = req.params.map_id;
+
+  var prom = database.getPointByMapId(map_id);
+
+  prom.then((dataFromDB) =>{
+    const templateVars = { user_id, dataPoints: dataFromDB };
+    console.log(dataFromDB);
     res.render("view_map", templateVars);
-  //});
+  }).catch((failure_message)=> {
+    console.log(failure_message);
+  });
+
 });
 
 
