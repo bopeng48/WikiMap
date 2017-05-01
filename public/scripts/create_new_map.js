@@ -12,8 +12,8 @@ function ajaxCall(method, url, data, dataType) {
    });
  }
 
- function clearData () {
-   document.getElementById('name').val('');
+ function clearData (name) {
+  name.val('');
  }
 
 function initNewMap() {
@@ -53,8 +53,10 @@ function initNewMap() {
 }
 
 function saveData() {
-  var name = escape(document.getElementById('name').value);
-  var description = escape(document.getElementById('description').value);
+  var nameNode = $('#name');
+  var descNode = $('#description');
+  var name = nameNode.val();
+  var description = descNode.val();
   // var image = document.getElementById('image').value;
   var latlng = marker.getPosition();
 
@@ -69,5 +71,13 @@ function saveData() {
   infowindow.close();
   messagewindow.open(map, marker);
 
-ajaxCall('POST', '/maps/:map_id/points', dat);
+ajaxCall('POST', '/maps/:map_id/points', dat)
+   .then((success) => {
+     console.log('success area');
+     clearData(nameNode);
+     clearData(descNode);
+   })
+   .catch((err) => {
+     console.error(err);
+   });
 }

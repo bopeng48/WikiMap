@@ -178,9 +178,11 @@ app.post('/maps/:map_id/points', auth, (req, res) => {
     user_id: body.user_id };
   database.addPoints((input), (success_message) => {
     console.log(success_message);
+    res.sendStatus(200);
   }, (failure_message) => {
   console.log(failure_message);
-  });
+    res.sendStatus(404);
+});
 });
 
 // Edit a single point on a map
