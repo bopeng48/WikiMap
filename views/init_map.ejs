@@ -8,84 +8,43 @@
   <meta charset="UTF-8">
   <title>Map Info</title>
   <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="styles/layout.css">
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyByuZxNssj0nyeSGfXEocERUoTWNanfawk&libraries=places"></script>
   <script type="text/javascript" src="/scripts/location_search.js"></script>
+<%- include('partials/nav-bar.ejs') %>
 </head>
-<style>
-.create {
-display: flex;
-align-items: flex-end;
-margin-left: 80px;
-}
 
-.title {
-display: flex;
-flex-direction: row-reverse;
-justify-content: center;
-align-items: flex-end;
-margin-left: 80px;
-}
-
-.description {
-display: flex;
-flex-direction: row-reverse;
-justify-content: center;
-align-items: flex-end;
-margin-left: 80px;
-}
-
-.start {
-display: flex;
-flex-direction: row-reverse;
-justify-content: center;
-align-items: flex-end;
-margin-left: 80px;
-}
-</style>
 
 <body>
-<%- include('partials/nav-bar.ejs') %>
+ <div class="page-header text-center"> 
+    <h1>Map Creation</h1>
+  </div>
 
-<!--<form action="/map_info" method="post"></form>
+  <form action="/maps/new" method="post">
+
   <p><h3>Please enter the title of your map: </h3>
     <type="text" size="20" maxlength="30" />
   </p>
   <textarea class="title" placeholder="Title..."></textarea>
   <p>
+
     <h3>Please enter the description of your map: </h3>
     <type="text" size="20" maxlength="200" />
   </p>
   <textarea class="description" placeholder="Description..."></textarea>  
   <p>
+
     <h3>Please enter the starting location: </h3>
     <type="text" size="20" maxlength="50" />
     <input id="locationName" name="locationName" type="text">
   </p>
-  <textarea class="start" placeholder="Starting Location..."></textarea>
-  <button class="create" value="Create"><a href="/maps/:map_id">Create</button></a>
 
-  <form action="/maps/new" method="POST">
-      <input type="submit" value="Create Map">
-  </form>-->
 
-  <form action="/maps/new" method="post">
-  <p><h3>Please enter the title of your map: </h3>
-    <type="text" size="20" maxlength="30" />
-  </p>
-  <textarea class="title" placeholder="Title..."></textarea>
-  <p>
-    <h3>Please enter the description of your map: </h3>
-    <type="text" size="20" maxlength="200" />
-  </p>
-  <textarea name="description" placeholder="Description..."></textarea>  
-  <p>
-    <h3>Please enter the starting location: </h3>
-    <type="text" size="20" maxlength="50" />
-    <input id="locationName" name="locationName" type="text">
-  </p>
+
   <input type="hidden" id="placeId" name="placeId" />
-    <input type="submit" value="Create Map">
+    <input type="submit" class="placeId btn btn-danger" value="Create Map">
   </form>
+
 
 </body>
 
