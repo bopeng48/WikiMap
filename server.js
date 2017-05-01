@@ -81,10 +81,6 @@ app.post('/logout', (req, res) => {
   res.redirect('/');
 });
 
-// app.get("/", (req, res) => {
-//   res.render("index");
-// });
-
 // Homepage (all maps)
 app.get('/', (req, res) => {
   const user_id = req.session.user_id;
@@ -164,7 +160,6 @@ app.get('/maps/:map_id/json', (req, res) => {
   const prom = database.getPointByMapId(map_id);
   prom.then((dataFromDB) => {
     const templateVars = { user_id, dataPoints: dataFromDB };
-    console.log(dataFromDB);
     res.json(dataFromDB);
   }).catch((failure_message) => {
     console.log(failure_message);
@@ -173,7 +168,6 @@ app.get('/maps/:map_id/json', (req, res) => {
 
 // Add a point to a map
 app.post('/maps/:map_id/points', auth, (req, res) => {
-  console.log('req.body is', req.body);
   let body = req.body;
   let input = { title: decode(body.title),
     description: decode(body.description),
@@ -184,9 +178,9 @@ app.post('/maps/:map_id/points', auth, (req, res) => {
     user_id: body.user_id };
   database.addPoints((input), (success_message) => {
     console.log(success_message);
-}, (failure_message) => {
-      console.log(failure_message);
-    });
+  }, (failure_message) => {
+  console.log(failure_message);
+  });
 });
 
 // Edit a single point on a map
