@@ -1,83 +1,47 @@
-<!doctype html>
-<head>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css?family=Cinzel" rel="stylesheet">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/styles/layout.css">
 
-  <html lang="en">
-  <link rel="stylesheet" href="/styles/nav-bar.css" type="text/css" />
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" />
-  <meta charset="UTF-8">
-  <style>
-  #nav-bar {
-    display: flex;
-    flex-direction: row-reverse;
-    justify-content: space-around;
-   
-    height: auto;
-    background-image: -webkit-linear-gradient(top,#d9534f 0,#c12e2a 100%);
-    background-image: linear-gradient(to bottom, #d9534f 0, #c12e2a 100%)
-    
-  }
-  .loggedas {
-    display: flex;
-    margin-left: -100px;
-  }
 
-  .logout {
-    color: white;
-  }
 
-    .homepage{
-      color: white;
-    }
 
-    .newmap {
-      color: white;
-    }
+<nav class="navbar navbar-inverse bg-inverse">
 
-    .profile {
-      color: white;
-    }
-  </style>
+  <h4>
+    <div class="greeting"><script src="/scripts/greeting.js"></script> </div>
+      <% if (user_id) { %>
+      <p class="loggedas"><%= user_id + '!' %></p>
+      </form>
+      <% } else { %>
+      <a href="/">Login</a>
+      <% } %>
+    <img class="logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ed/WikimapiaLogo.PNG/200px-WikimapiaLogo.PNG" width="80px" height="80px">
+  </h4>
 
-<body>
-  <nav>
-    <div>
-      <ul id="nav-bar">
-                      
-        <a href="/logout"><button class="btn btn-danger" type="submit">
-        <p class="logout">
-        <h3>Logout</h3>
-        </p>
-        </button></a>
+
+  <h2><ul class="nav nav-tabs">
+    <li class="nav-item">
+      <a class="nav-link active" href="/">Home</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link active" href="/maps/new">Create New Map</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="/users/:id">Profile</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="/logout">Logout</a>
+    </li>
+  </ul></h2>
+
+
+
+
         
-        <a href="/"><button class="btn btn-danger" href="/">
-        <p class="homepage">
-        <h3>Homepage</h3>
-        </p>
-        </button></a>
-
-        <a href="/maps/new"><button class="btn btn-danger" type="submit">
-        <p class="newmap">
-        <h3>Create New Map</h3>
-        </p>
-        </button></a>
-                
-        <a  href="/users/:id"><button class="btn btn-danger" type="submit">
-        <p class="profile">
-        <h3>Profile</h3>
-        </p>
-        </button></a>
-        
-        <h3>
-        <% if (user_id) { %>
-    	  <p class="loggedas"><%= user_id + '!' %></p>
-          </form>
-          <% } else { %>
-          <a href="/">Login</a>
-          <% } %>
-        </h3>
-        <div><script src="/scripts/greeting.js"></script> </div>
+       
       </ul>
     </div>
   </nav>
-</html>
+

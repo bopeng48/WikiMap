@@ -1,72 +1,37 @@
 <!doctype html>
-<html lang="en">
+<html lang = "en">
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <meta charset="UTF-8">
-  <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
-<title>Profile Page</title>
-<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+<meta charset="UTF-8">
+ <title>Profile</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<link rel="stylesheet" href="styles/layout.css">
 </head>
+<%- include('partials/nav-bar.ejs') %>
+
 <body>
-
-<style>
-.maplists {
-  display: flex;
-  justify-content: space-around;
- align-items: flex-end;
- 
-}
-
-.maps {
-  display: flex;
-  justify-content: center;
-}
-
-.row {
-  display: flex;
-  flex-direction: column;
-  margin: auto;
-  padding: 10px;
-}
-
-.username {
-  display: flex;
-  padding: 10px;
-  font-size: -webkit-xxx-large
-}
-
-#contributed {
-  display: flex;
-
-}
-
-</style>
- <header>
-     <%- include('partials/nav-bar.ejs') %>
- </header>
- 
- <div class="profile-container">
-
-  <div class="page-header text-center">
-    <h1>Profile Page</h1>
-    
+ <div class="container-fluid">
+  
+  <!-- Page Header -->
+  <div class="page-header text-center"> 
+    <h1>Profile</h1>
   </div>
-
-  <h1 class="username"><%= username %></h1>
-  </div>
-
+  
+  <!--Disaplays username on page-->
+  <h1 class="username"><%= username %></h1> 
+  
+<!--Shows user information-->
   <div class="row">
-
-    <p>User ID: <%= username %></p>
+    <h3><p>User ID: <%= username %></p>
     <p>E-mail: <%= email %></p>
     <p>First Name: <%= first_name %></p>
     <p>Last Name: <%= last_name %></p>
-  </div>
+  </div></h3>
 
-
+<!--Map List Contents-->
 <h1 class="maps">Maps</h1>
   <div class="maplists">
+    
     <div> 
     <h3>My Contribution</h3>
     <p id="contributed"></p>
@@ -75,6 +40,7 @@
     <h4>Haileys Favourites</h4>
     <h4>Arias Eateries</h4>
     </div>
+
     <div>
     <h3>Favourites</h3>
     <p id="favourites"></p>
@@ -83,6 +49,7 @@
     <h4>Stanley Park</h4>
     <h4>Robson Street</h4>
     </div>
+
     <div>
     <h3>Created</h3>
     <p id="created"></p>
@@ -91,6 +58,8 @@
     <h4>Filming Locations</h4>
     <h4>Best Scenic Routes</h4>
     </div>
+
   </div>
+</div> <!-- for fluid container
   </body>
 </html>
