@@ -1,69 +1,83 @@
-let marker;
+var marker;
+var infowindow;
+var messagewindow;
+var map;
+
+function ajaxCall(method, url, data, dataType) {
+   return $.ajax({
+     method,
+     url,
+     data,
+     dataType,
+   });
+ }
+
+ function clearData (name) {
+  name.val('');
+ }
 
 function initNewMap() {
-  var infowindow;
-  var messagewindow;
+
   var geocoder = new google.maps.Geocoder();
-
-
-  var map = new google.maps.Map(document.getElementById('map'), {
-          // zoom: 8,
-          // center: {lat: 40.72, lng: -73.96}
-  });
+  map = new google.maps.Map(document.getElementById('map'), {});
 
   var placeId = document.getElementsByClassName('test');
   var placeIdString = placeId['0'].textContent;
   geocoder.geocode({ placeId: placeIdString.slice(1) }, (results, status) => {
     if (results[0]) {
-      map.setZoom(13); // to be changed to automatic zoom...somehow
+      map.fitBounds(results[0].geometry.viewport);
       map.setCenter(results[0].geometry.location);
     }
   });
 
   infowindow = new google.maps.InfoWindow({
-    content: document.getElementById('form'),
+    content: document.getElementById('form')
   });
 
   messagewindow = new google.maps.InfoWindow({
-    content: document.getElementById('message'),
+    content: document.getElementById('message')
   });
 
   google.maps.event.addListener(map, 'click', (event) => {
     console.log('from within google.map.event.addListener.map');
     marker = new google.maps.Marker({
       position: event.latLng,
-      map,
+      map: map
     });
 
-    google.maps.event.addListener(marker, 'click', () => {
-      console.log('from within google.maps.event.addListener.marker');
-      infowindow.open(map, marker);
+  google.maps.event.addListener(marker, 'click', () => {
+    console.log('from within google.maps.event.addListener.marker');
+    infowindow.open(map, marker);
     });
   });
 }
 
 function saveData() {
-  var name = escape(document.getElementById('name').value);
-  var description = escape(document.getElementById('description').value);
+  var nameNode = $('#name');
+  var descNode = $('#description');
+  var name = nameNode.val();
+  var description = descNode.val();
   // var image = document.getElementById('image').value;
   var latlng = marker.getPosition();
 
   var dat = { title: name,
     description,
     img: 'path/1',
-    map_id: 1,
+    map_id: 4,
     lat: latlng.lat(),
     long: latlng.lng(),
     user_id: 1 };
 
-  console.log(dat);
-  $.ajax({
-    url: '/maps/:map_id/points',
-    method: 'POST',
-    data: dat,
-    success() {
-       () => { console.log('ajax works!!'); };
-     },
-  });
-}
+  infowindow.close();
+  messagewindow.open(map, marker);
 
+ajaxCall('POST', '/maps/:map_id/points', dat)
+   .then((success) => {
+     console.log('success area');
+     clearData(nameNode);
+     clearData(descNode);
+   })
+   .catch((err) => {
+     console.error(err);
+   });
+}

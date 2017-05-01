@@ -81,10 +81,6 @@ app.post('/logout', (req, res) => {
   res.redirect('/');
 });
 
-// app.get("/", (req, res) => {
-//   res.render("index");
-// });
-
 // Homepage (all maps)
 app.get('/', (req, res) => {
   const user_id = req.session.user_id;
@@ -117,15 +113,26 @@ app.get('/maps/new', auth, (req, res) => {
 // Submits form with new map information
 app.post('/maps/new', auth, (req, res) => {
   // ----- creates new map row in database with form info
+  const title = req.body.title;
+  const description = req.body.description;
+  console.log("title is", title, "and description is", description);
   const locationName = req.body.locationName;
   const placeId = req.body.placeId;
   const user_id = req.session.user_id;
+  console.log("user id is",user_id, "");
+  const dataInput = {title: title, description: description, user_id: 1};
+  // hard coding input for user_id . need to be revisited later
+
+  var prom = database.createMap(dataInput);
+  //prom.then((id)=> {console.log("newly inserted element has id: ",id);}).catch(()=>{console.log("oh no")});
+  var id = prom.then((id)=>{console.log("in cb", id[0]);}).catch(()=>{console.log("failed")});
+
   let myData = {
     user_id,
     locationName,
     placeId,
   };
-  res.render('create_map', { myData: placeId });
+  res.render('create_map', { myData: placeId, title: title, description: description });
 });
 
 
@@ -153,7 +160,6 @@ app.get('/maps/:map_id/json', (req, res) => {
   const prom = database.getPointByMapId(map_id);
   prom.then((dataFromDB) => {
     const templateVars = { user_id, dataPoints: dataFromDB };
-    console.log(dataFromDB);
     res.json(dataFromDB);
   }).catch((failure_message) => {
     console.log(failure_message);
@@ -162,7 +168,6 @@ app.get('/maps/:map_id/json', (req, res) => {
 
 // Add a point to a map
 app.post('/maps/:map_id/points', auth, (req, res) => {
-  console.log('req.body is', req.body);
   let body = req.body;
   let input = { title: decode(body.title),
     description: decode(body.description),
@@ -173,9 +178,11 @@ app.post('/maps/:map_id/points', auth, (req, res) => {
     user_id: body.user_id };
   database.addPoints((input), (success_message) => {
     console.log(success_message);
-}, (failure_message) => {
-      console.log(failure_message);
-    });
+    res.sendStatus(200);
+  }, (failure_message) => {
+  console.log(failure_message);
+    res.sendStatus(404);
+});
 });
 
 // Edit a single point on a map

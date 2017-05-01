@@ -3,17 +3,17 @@ module.exports = function makeDataHelpers(knex) {
     getMapNames: function(success, failure) {
       return knex.select("title").from("maps");
     },
-    createMap: function(info, success, failure) {
-      knex('maps').insert({title: info.title, description: info.description, user_id: info.user_id}).
-      then(
-        function(result) {
-        success(result);
-      }).
-      catch(
-        function(reason) {
-          failure(reason);
-        })
+
+    getMapIdbyName: function(info,success, failure) {
+     return Knex.select("id").from('maps').where('title', info);
     },
+
+    createMap: function(info, success, failure) {
+      return knex('maps')
+      .returning('id')
+      .insert({title: info.title, description: info.description, user_id: info.user_id});
+    },
+
     addPoints: function(info, success, failure) {
       knex('points').insert({title: info.title,
        description: info.description, img: info.img,
@@ -28,6 +28,7 @@ module.exports = function makeDataHelpers(knex) {
           failure(reason);
         })
     },
+
     findUserByEmail: function(info, success, failure) {    // autheticates user credential
       knex('users').select('id', 'password')
       .where({email: info.email})   // where email = info.email
@@ -41,11 +42,10 @@ module.exports = function makeDataHelpers(knex) {
           failure(reason);
         })
     },
+
     getPointByMapId: function(id, success, failure) {
       return knex.select('*').from('points').where('map_id',id);
     }
 
-    //select points.title, lat, long from points join users on points.user_id = users.id
-    // join maps on points.map_id = maps.id where points.user_id = 1;
   }
 }
