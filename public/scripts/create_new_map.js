@@ -63,7 +63,7 @@ function saveData() {
   var dat = { title: name,
     description,
     img: 'path/1',
-    map_id: 4,
+    map_id: 8,
     lat: latlng.lat(),
     long: latlng.lng(),
     user_id: 1 };
